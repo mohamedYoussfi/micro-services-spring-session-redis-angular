@@ -43,12 +43,7 @@ public class SecurityConfig {
         return httpSecurity
                 .cors(Customizer.withDefaults())
                 .csrf(csrf->csrf.disable())
-                .formLogin(fl->fl.successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
-                    }
-                }))
+                .formLogin(fl->fl.successHandler((request, response, authentication) -> {}))
                 .authorizeHttpRequests(ar->ar.requestMatchers(new AntPathRequestMatcher("/login/**")).permitAll())
                 .authorizeHttpRequests(ar->ar.anyRequest().authenticated())
                 //.logout(lo->lo.logoutSuccessUrl("http://localhost:8082/login"))
